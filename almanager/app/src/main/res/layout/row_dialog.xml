@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="5dp">
+    <TextView
+        android:padding="10dp"
+        android:id="@+id/row_dialog_name"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="10000000" />
+    <TextView
+        android:padding="10dp"
+        android:layout_weight="1"
+        android:id="@+id/row_dialog_phone"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="10000000000" />
+</LinearLayout>
