@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -15,7 +17,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 /**
  * Created by Hungdn on 4/10/2018.
@@ -28,7 +32,7 @@ public class ChoosePersonDialog extends Dialog {
     PersonAdapters adapters;
     EditText bt;
     Class cls;
-
+    public static ArrayList<AcountDB> list, listfill;
     public ChoosePersonDialog(@NonNull Context context, EditText bt, Class cls) {
         super(context);
         this.context = context;
@@ -47,9 +51,8 @@ public class ChoosePersonDialog extends Dialog {
         listView = (ListView) findViewById(R.id.listviewdialog);
         adapters = new PersonAdapters(context);
         listView.setAdapter(adapters);
-
         AcountDB.Builder builder = new AcountDB.Builder(context);
-        final ArrayList<AcountDB> list = new AcountDB(builder).queryAllPerson();
+        list = new AcountDB(builder).queryAllPerson();
         adapters.updatedata(list);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -92,6 +95,35 @@ public class ChoosePersonDialog extends Dialog {
                 return true;
             }
         });
+
+//        ed_filll.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable editable) {
+//                listfill.clear();
+//                for (int i = 0; i < list.size(); i++) {
+//                    if (removeAccent(list.get(i).getFullname()).contains(removeAccent(ed_filll.getText().toString()))) {
+//                        listfill.add(list.get(i));
+//                    }
+//                }
+//                adapters.updatedata(listfill);
+//            }
+//        });
+    }
+    public static String removeAccent(String s) {
+
+        String temp = Normalizer.normalize(s, Normalizer.Form.NFD);
+        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+        return pattern.matcher(temp).replaceAll("").toLowerCase();
     }
 
 }

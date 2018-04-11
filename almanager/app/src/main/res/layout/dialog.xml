@@ -28,9 +28,11 @@
         android:padding="10dp">
 
         <EditText
+            android:paddingLeft="5dp"
+            android:background="@mipmap/back_ground"
             android:id="@+id/ed_fill"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:hint="Nhập tên người mua" />
 
         <LinearLayout
